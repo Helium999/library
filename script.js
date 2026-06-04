@@ -65,3 +65,39 @@ function closeNewBookDialog() {
     closeDialog(closeButton, dialog);
 }
 closeNewBookDialog();
+
+function displayNewBook(book) {
+    const container = document.querySelector("#library");
+    const card = createBookCard(book);
+
+    container.appendChild(card);
+}
+
+function addNewBookToLibrary() {
+    let name = document.querySelector("#name").value;
+    let author = document.querySelector("#author").value;
+    let genre = document.querySelector("#genre").value;
+    let yearOfRelease = document.querySelector("#yearOfRelease").value;
+
+    addBookToLibrary(name, author, genre, yearOfRelease);
+
+    const newBook = library[library.length - 1];
+
+    displayNewBook(newBook);
+}
+
+function submitNewBookDetails() {
+    const submitButton = document.querySelector("#submit-book-details");
+
+    submitButton.addEventListener("click", () => {
+        addNewBookToLibrary()
+        dialog = document.querySelector(".add-new-book");
+        dialog.close();
+
+        document.querySelector("#name").value = "";
+        document.querySelector("#author").value = "";
+        document.querySelector("#genre").value = "";
+        document.querySelector("#yearOfRelease").value = "";
+    })
+}
+submitNewBookDetails()

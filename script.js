@@ -8,7 +8,7 @@ function Book(name, author, genre, yearOfRelease, id) {
     this.id = id;
 }
 
-function addBookToLibrary(name, author, genre, yearOfRelease) {
+function addBookToLibrary(name, author="Unknown", genre="NIL", yearOfRelease="NIL") {
     const id = crypto.randomUUID();
     const newBook = new Book(name, author, genre, yearOfRelease, id);
     library.push(newBook);
@@ -37,3 +37,31 @@ function displayBook(books) {
         container.appendChild(card);
     }
 }
+
+function openDialog(openButton, dialog) {
+    openButton.addEventListener("click", () => {
+        dialog.showModal();
+    });
+}
+
+function closeDialog(closeButton, dialog) {
+    closeButton.addEventListener("click", () => {
+        dialog.close();
+    })
+}
+
+function openNewBookDialog() {
+    const openButton = document.querySelector("#new-book-button");
+    const dialog = document.querySelector(".add-new-book");
+
+    openDialog(openButton, dialog);
+}
+openNewBookDialog();
+
+function closeNewBookDialog() {
+    const closeButton = document.querySelector("#close-dialog-button");
+    const dialog = document.querySelector(".add-new-book");
+
+    closeDialog(closeButton, dialog);
+}
+closeNewBookDialog();

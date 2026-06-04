@@ -33,7 +33,7 @@ function displayBook(books) {
     const container = document.querySelector("#library");
 
     for(const book of books) {
-        card = createBookCard(book);
+        const card = createBookCard(book);
         container.appendChild(card);
     }
 }

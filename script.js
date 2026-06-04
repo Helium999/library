@@ -8,7 +8,7 @@ function Book(name, author, genre, yearOfRelease, id) {
     this.id = id;
 }
 
-function addBookToLibrary(name, author="Unknown", genre="NIL", yearOfRelease="NIL") {
+function addBookToLibrary(name, author, genre, yearOfRelease) {
     const id = crypto.randomUUID();
     const newBook = new Book(name, author, genre, yearOfRelease, id);
     library.push(newBook);
@@ -20,9 +20,9 @@ function createBookCard(book) {
 
     card.innerHTML = `
         <h2>${book.name}</h2>
-        <p><strong>Author:</strong> ${book.author}</p>
-        <p><strong>Genre:</strong> ${book.genre}</p>
-        <p><strong>Released:</strong> ${book.yearOfRelease}</p>
+        <p><strong>Author:</strong> ${book.author || "Not Specified"}</p>
+        <p><strong>Genre:</strong> ${book.genre || "Not Specified"}</p>
+        <p><strong>Released:</strong> ${book.yearOfRelease || "Not Specified"}</p>
         <p><strong>ID:</strong> ${book.id}</p>
     `;
 
@@ -75,6 +75,10 @@ function displayNewBook(book) {
 
 function addNewBookToLibrary() {
     let name = document.querySelector("#name").value;
+    if (!name.trim()) {
+    alert("Book name is required");
+    return;
+    }
     let author = document.querySelector("#author").value;
     let genre = document.querySelector("#genre").value;
     let yearOfRelease = document.querySelector("#yearOfRelease").value;
@@ -91,7 +95,7 @@ function submitNewBookDetails() {
 
     submitButton.addEventListener("click", () => {
         addNewBookToLibrary()
-        dialog = document.querySelector(".add-new-book");
+        const dialog = document.querySelector(".add-new-book");
         dialog.close();
 
         document.querySelector("#name").value = "";

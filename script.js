@@ -14,6 +14,14 @@ function addBookToLibrary(name, author, genre, yearOfRelease) {
     library.push(newBook);
 }
 
+function addRemoveButtonInsideCard(card) {
+    const removeButton = document.createElement("button");
+
+    removeButton.innerText = "Remove Book";
+
+    card.appendChild(removeButton);
+}
+
 function createBookCard(book) {
     const card = document.createElement("div");
     card.classList.add("book-card");
@@ -25,6 +33,8 @@ function createBookCard(book) {
         <p><strong>Released:</strong> ${book.yearOfRelease || "Not Specified"}</p>
         <p><strong>ID:</strong> ${book.id}</p>
     `;
+
+    addRemoveButtonInsideCard(card);
 
     return card;
 }
@@ -104,4 +114,5 @@ function submitNewBookDetails() {
         document.querySelector("#yearOfRelease").value = "";
     })
 }
-submitNewBookDetails()
+submitNewBookDetails();
+

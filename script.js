@@ -14,17 +14,31 @@ function addBookToLibrary(name, author, genre, yearOfRelease) {
     library.push(newBook);
 }
 
+function removeBook(removeButton) {
+    removeButton.addEventListener("click", (e) => {
+        library = library.filter(book => book.id !== e.target.dataset.bookId);
+        const cardToBeRemoved = document.querySelector(`div[data-book-id="${e.target.dataset.bookId}"]`);
+        cardToBeRemoved.remove();
+    })
+}
+
 function addRemoveButtonInsideCard(card) {
     const removeButton = document.createElement("button");
+
+    removeButton.dataset.bookId = card.dataset.bookId;
 
     removeButton.innerText = "Remove Book";
 
     card.appendChild(removeButton);
+
+    removeBook(removeButton);
 }
 
 function createBookCard(book) {
     const card = document.createElement("div");
     card.classList.add("book-card");
+
+    card.dataset.bookId = book.id;
 
     card.innerHTML = `
         <h2>${book.name}</h2>

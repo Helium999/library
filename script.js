@@ -42,7 +42,11 @@ function markAsRead(readStatusButton) {
                 if(book.id === readStatusButton.dataset.bookId) {
                     book.read = true;
                 }
-                else {
+            }
+        }
+        else {
+            for(let book of library) {
+                if(book.id === readStatusButton.dataset.bookId) {
                     book.read = false;
                 }
             }

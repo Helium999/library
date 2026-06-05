@@ -54,13 +54,13 @@ function addReadStatusButtonInsideCard(card) {
     const readStatusButtonLabel = document.createElement("label");
     const readStatusButton = document.createElement("input");
     
-    readStatusButtonLabel.for = "readStatus";
-    readStatusButtonLabel.innerText = "Mark as read";
-
     readStatusButton.type = "checkbox";
-    readStatusButton.id = "readStatus";
+    readStatusButton.id = `readStatus-of-${card.dataset.bookId}`;
     readStatusButton.name = "readStatus";
     readStatusButton.dataset.bookId = card.dataset.bookId;
+
+    readStatusButtonLabel.htmlFor = readStatusButton.id;
+    readStatusButtonLabel.innerText = "Mark as read";
 
     card.appendChild(readStatusButtonLabel)
     card.appendChild(readStatusButton)

@@ -38,14 +38,14 @@ function addRemoveButtonInsideCard(card) {
 function markAsRead(readStatusButton) {
     readStatusButton.addEventListener("click", () => {
         if(readStatusButton.checked) {
-            for(book of library) {
+            for(let book of library) {
                 if(book.id === readStatusButton.dataset.bookId) {
                     book.read = true;
                 }
+                else {
+                    book.read = false;
+                }
             }
-        }
-        else {
-            book.read = false;
         }
     })
 }

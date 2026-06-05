@@ -26,12 +26,27 @@ function addRemoveButtonInsideCard(card) {
     const removeButton = document.createElement("button");
 
     removeButton.dataset.bookId = card.dataset.bookId;
-
     removeButton.innerText = "Remove Book";
 
     card.appendChild(removeButton);
 
     removeBook(removeButton);
+}
+
+function addReadStatusButtonInsideCard(card) {
+    const readStatusButtonLabel = document.createElement("label");
+    const readStatusButton = document.createElement("input");
+    
+    readStatusButtonLabel.for = "readStatus";
+    readStatusButtonLabel.innerText = "Mark as read";
+
+    readStatusButton.type = "checkbox";
+    readStatusButton.id = "readStatus";
+    readStatusButton.name = "readStatus";
+    readStatusButton.dataset.bookId = card.dataset.bookId;
+
+    card.appendChild(readStatusButtonLabel)
+    card.appendChild(readStatusButton)
 }
 
 function createBookCard(book) {
@@ -49,6 +64,7 @@ function createBookCard(book) {
     `;
 
     addRemoveButtonInsideCard(card);
+    addReadStatusButtonInsideCard(card);
 
     return card;
 }
@@ -129,4 +145,3 @@ function submitNewBookDetails() {
     })
 }
 submitNewBookDetails();
-

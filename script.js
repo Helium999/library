@@ -1,16 +1,18 @@
 let library = [];
 
-function Book(name, author, genre, yearOfRelease, id) {
+function Book(name, author, genre, yearOfRelease, id, read) {
     this.name = name;
     this.author = author;
     this.genre = genre;
     this.yearOfRelease = yearOfRelease;
     this.id = id;
+    this.read = read;
 }
 
 function addBookToLibrary(name, author, genre, yearOfRelease) {
     const id = crypto.randomUUID();
-    const newBook = new Book(name, author, genre, yearOfRelease, id);
+    const read = false;
+    const newBook = new Book(name, author, genre, yearOfRelease, id, read);
     library.push(newBook);
 }
 
@@ -33,6 +35,21 @@ function addRemoveButtonInsideCard(card) {
     removeBook(removeButton);
 }
 
+function markAsRead(readStatusButton) {
+    readStatusButton.addEventListener("click", () => {
+        if(readStatusButton.checked) {
+            for(book of library) {
+                if(book.id === readStatusButton.dataset.bookId) {
+                    book.read = true;
+                }
+            }
+        }
+        else {
+            book.read = false;
+        }
+    })
+}
+
 function addReadStatusButtonInsideCard(card) {
     const readStatusButtonLabel = document.createElement("label");
     const readStatusButton = document.createElement("input");
@@ -47,6 +64,8 @@ function addReadStatusButtonInsideCard(card) {
 
     card.appendChild(readStatusButtonLabel)
     card.appendChild(readStatusButton)
+
+    markAsRead(readStatusButton);
 }
 
 function createBookCard(book) {
